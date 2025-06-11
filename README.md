@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Professional React Developer Test: Advanced Datatable \& Logic Challenge
 
-First, run the development server:
+### Task 1: Enterprise-Grade User Management Datatable (2-3 hours)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**Objective:** Build a React datatable with complex functionality using the GitHub Issues API (`https://api.github.com/repos/[owner]/[repo]/issues`)
+
+**Core Requirements:**
+
+1. **Server-Side Operations:**
+    - Implement pagination with page size selection (10/25/50 rows)
+    - Add sorting by multiple columns (created_at, updated_at, title)
+    - Support nested sorting (primary/secondary sort columns)
+    - API parameters must include `page`, `per_page`, `sort`, `direction`
+2. **Advanced Features:**
+
+```jsx
+// Example column configuration
+const columns = [
+  { 
+    id: 'title', 
+    header: 'Issue Title',
+    visible: true,
+    sortable: true,
+    filterType: 'text'
+  },
+  {
+    id: 'state',
+    header: 'Status',
+    visible: true,
+    sortable: false,
+    filterType: 'dropdown',
+    options: ['open', 'closed']
+  }
+];
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    - Column visibility toggles with persistence (localStorage)
+    - Custom filter types per column (text input, dropdown, date range)
+    - Loading states with skeleton placeholders
+3. **Performance Optimization:**
+    - Window virtualization for large datasets
+    - Memoized table components
+    - Client-side caching of API responses (TTL: 5 minutes)
+4. **Error Handling:**
+    - API error recovery with retry logic
+    - Empty state UI
+    - Network connectivity detection
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Bonus Points For:**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- TypeScript implementation
+- Unit tests for sorting/filtering logic
+- Accessibility compliance (WCAG 2.1)
+- Responsive design for mobile
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### Task 2: Logic \& Optimization Challenge (45 minutes)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Problem:** Fix and optimize this flawed search component:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```jsx
+function Search() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
 
-## Deploy on Vercel
+  useEffect(() => {
+    fetch(`/api/search?q=${query}`)
+      .then(res => res.json())
+      .then(data => setResults(data));
+  }, [query]);
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  return (
+    <div>
+      <input 
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <ul>
+        {results.map(item => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Required Fixes:**
+
+1. **Debounce Search Input** - Prevent API spamming
+2. **Race Condition Handling** - Cancel outdated requests
+3. **Memory Leak Prevention** - Cleanup abandoned requests
+4. **Error Boundaries** - Add error handling
+5. **Performance Optimization** - Memoize/cache results
+
+**Evaluation Criteria:**
+
+- Understanding of React hooks lifecycle
+- Asynchronous state management
+- Optimization techniques
+- Error handling strategies
+
+---
+
+### Implementation Recommendations:
+
+1. **Use CodeSandbox/StackBlitz:** We expect a response with a single URL for the CodeSandbox/StackBlitz container.
+2. **Scoring Rubric:**
+
+
+| Category | Weight | Evaluation Method |
+| :-- | :-- | :-- |
+| Functionality | 40% | Automated test suite |
+| Code Quality | 30% | ESLint/Prettier rules |
+| Performance | 20% | Lighthouse audit |
+| Documentation | 10% | Code comments/README |
