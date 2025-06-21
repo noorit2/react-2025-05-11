@@ -160,7 +160,7 @@ function Table() {
       rows={tableData.rows}
       loading={isLoading}
       paginationModel={{ page: query.page, pageSize: query.per_page }}
-      rowCount={1000} // Estimate or set dynamically
+      rowCount={-1} // Estimate or set dynamically
       paginationMode="server"
       onPaginationModelChange={(model) =>
         handlePaginationChange(model.page, model.pageSize)
