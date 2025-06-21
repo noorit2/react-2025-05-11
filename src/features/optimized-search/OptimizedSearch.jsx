@@ -41,7 +41,8 @@ export default function OptimizedSearch() {
 
   return (
     <div>
-      <input value={query} className="border border-solid border-black mt-10" onChange={(e) => setQuery(e.target.value)} />
+      <label htmlFor="search">Search</label>
+      <input id="search" value={query} className="border border-solid border-black mt-10" onChange={(e) => setQuery(e.target.value)} />
       {error && <p> {error.message}</p>}
       <ul>
         {results.map((item) => (
