@@ -53,13 +53,13 @@ function Table() {
     rows: [],
   });
 
-  const [query, setQuery] = useState({
+  const [query, setQuery] = useState({  
     page: 0,
     per_page: 10,
   });
 
   const [columnVisibilityModel, setColumnVisibilityModel] = useState(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined") { // Check if window is defined to avoid SSR issues
       const saved = localStorage.getItem("github-columns-visible");
       return saved ? JSON.parse(saved) : {};
     }
@@ -83,7 +83,7 @@ function Table() {
   const handleSortChange = (field, direction) => {
     setQuery((prev) => ({
       ...prev,
-      page: 0,
+      page: 0,  //reset pagination on sort change
       pageSize: 10,
       sort: field,
       direction,
@@ -97,7 +97,7 @@ function Table() {
 
     let { field, value } = firstFilter;
 
-    if (field === "state") {
+    if (field === "state") {  // Handle boolean field specially
       value = value ? "open" : "closed";
       if (value === undefined || value === null) value = "all";
     }
@@ -105,7 +105,7 @@ function Table() {
     setQuery((prev) => ({
       ...prev,
       page: 0,
-      pageSize: 10,
+      pageSize: 10,  
       filter: { field, value },
     }));
   }, []);
@@ -117,7 +117,7 @@ function Table() {
     issues.map((issue) => ({
       ...issue,
       state: issue.state === "open",
-      created: new Date(issue.created_at),
+      created: new Date(issue.created_at), 
       updated: new Date(issue.updated_at),
     }));
 
@@ -126,7 +126,7 @@ function Table() {
     queryFn: getIssuesData,
     onError: (err) => toast.error(err.message || "Something went wrong!"),
     enabled: true,
-    staleTime: 5 * 60 * 1000,
+    staleTime: 5 * 60 * 1000,  // 5 minutes
     cacheTime: 5 * 60 * 1000,
   });
 
@@ -134,17 +134,17 @@ function Table() {
   useEffect(() => {
     if (error) {
       toast.error(error.message || "Something went wrong!");
-      setTableData((prev) => ({ ...prev, rows: [] }));
+      setTableData((prev) => ({ ...prev, rows: [] })); //reset rows on error
       return;
     }
 
     if (data?.error) {
-      toast.error(data.error || "Something went wrong!");
+      toast.error(data.error || "Something went wrong!"); 
       setTableData((prev) => ({ ...prev, rows: [] }));
       return;
     }
 
-    if (data?.success) {
+    if (data?.success) { 
       setTableData((prev) => ({
         ...prev,
         rows: transformIssuesData(data.data),
@@ -160,7 +160,7 @@ function Table() {
       rows={tableData.rows}
       loading={isLoading}
       paginationModel={{ page: query.page, pageSize: query.per_page }}
-      rowCount={-1} // Estimate or set dynamically
+      rowCount={-1} 
       paginationMode="server"
       onPaginationModelChange={(model) =>
         handlePaginationChange(model.page, model.pageSize)

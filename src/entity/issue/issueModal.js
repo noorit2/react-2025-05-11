@@ -25,7 +25,7 @@ export async function getIssuesModal(data){
         
     return {
       ...rawData,
-       [rawData?.filter?.field]: [rawData?.filter?.value]
+       [rawData?.filter?.field]: [rawData?.filter?.value]  
     }
     
     }
