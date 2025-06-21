@@ -9,7 +9,7 @@
 
 1. **Server-Side Operations:**
     - Implement pagination with page size selection (10/25/50 rows)
-    - Add sorting by multiple columns (created_at, updated_at, title)
+    - Add sorting by multiple columns (created_at, updated_at, title);
     - Support nested sorting (primary/secondary sort columns)
     - API parameters must include `page`, `per_page`, `sort`, `direction`
 2. **Advanced Features:**
