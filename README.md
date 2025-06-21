@@ -8,10 +8,10 @@
 **Core Requirements:**
 
 1. **Server-Side Operations:**
-    - Implement pagination with page size selection (10/25/50 rows)
-    - Add sorting by multiple columns (created_at, updated_at, title);
-    - Support nested sorting (primary/secondary sort columns)
-    - API parameters must include `page`, `per_page`, `sort`, `direction`
+    - Implement pagination with page size selection (10/25/50 rows) (done)
+    - Add sorting by multiple columns (created_at, updated_at, title)  (done)
+    - Support nested sorting (primary/secondary sort columns) (not sure if github supports it)
+    - API parameters must include `page`, `per_page`, `sort`, `direction` (done)
 2. **Advanced Features:**
 
 ```jsx
@@ -35,16 +35,16 @@ const columns = [
 ];
 ```
 
-    - Column visibility toggles with persistence (localStorage)
-    - Custom filter types per column (text input, dropdown, date range)
-    - Loading states with skeleton placeholders
+    - Column visibility toggles with persistence (localStorage) (done)
+    - Custom filter types per column (text input, dropdown, date range) (data range doesn't exist only since)
+    - Loading states with skeleton placeholders 
 3. **Performance Optimization:**
     - Window virtualization for large datasets
     - Memoized table components
-    - Client-side caching of API responses (TTL: 5 minutes)
+    - Client-side caching of API responses (TTL: 5 minutes) (done)
 4. **Error Handling:**
-    - API error recovery with retry logic
-    - Empty state UI
+    - API error recovery with retry logic (done with react query)
+    - Empty state UI (built in)
     - Network connectivity detection
 
 **Bonus Points For:**
